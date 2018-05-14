@@ -1,12 +1,7 @@
-# stripe on heroku
-
-		heroku login
+# stripe on node
 
 
-Create and deploy a hello world Heroku express 'get'
-
-http://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up
-
+npm i -g now
 
 
 Do the stripe
