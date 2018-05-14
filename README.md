@@ -1,7 +1,7 @@
 # stripe on node
 
 
-npm i -g now
+	now
 
 
 Do the stripe

@@ -1,11 +1,36 @@
 
 const express = require('express')
 const path = require('path')
-const PORT = process.env.PORT || 5000
+const yaml = require('js-yaml')
+let keys = yaml.load(fs.readFileSync('keys.yaml'))
+const PORT = 8443
 
-express()
-	.use(express.static(path.join(__dirname, 'www')))
-	.set('views', path.join(__dirname, 'www'))
+const stripe = require('stripe')(keys.keySecret)
 
-	.get('/', (req, res) => res.render('www/index'))
-	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.set('view engine', 'pug');
+app.use(require('body-parser').urlencoded({extended: false}))
+
+// ////////////////////////////////////////////////
+let keyPublishable = keys.keyPublishable
+app.get('/', (req, res) =>
+  res.render('index.pug', {keyPublishable}))
+
+app.post('/charge', (req, res) => {
+  let amount = 500;
+
+  stripe.customers.create({
+	  email: req.body.stripeEmail,
+	 source: req.body.stripeToken
+  })
+  .then(customer =>
+	 stripe.charges.create({
+		amount,
+		description: 'Sample Charge',
+			currency: 'usd',
+			customer: customer.id
+	 }))
+  .then(charge => res.render('charge.pug'));
+});
+
+app.listen(PORT)
+
