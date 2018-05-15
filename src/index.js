@@ -5,7 +5,7 @@ const express = require('express')()
 const fs = require('fs')
 const yaml = require('js-yaml')
 let keys = yaml.load(fs.readFileSync('keys.yaml'))
-const PORT = 8443
+const PORT = 8444
 
 const stripe = require('stripe')(keys.keySecret)
 
@@ -17,6 +17,7 @@ let keyPublishable = keys.keyPublishable
 express.get('/', (req, res) =>
   res.render('index.pug', {keyPublishable}))
 
+// ////////////////////////////////////////////////
 express.post('/charge', (req, res) => {
   let amount = 500;
 
@@ -31,8 +32,8 @@ express.post('/charge', (req, res) => {
 			currency: 'usd',
 			customer: customer.id
 	 }))
-  .then(charge => res.render('charge.pug'));
-});
+  .then(charge => res.render('charge.pug'))
+})
 
 express.listen(PORT)
 console.log(PORT)
