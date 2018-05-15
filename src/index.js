@@ -1,21 +1,23 @@
 
-const express = require('express')
-const path = require('path')
+
+const express = require('express')()
+//const path = require('path')
+const fs = require('fs')
 const yaml = require('js-yaml')
 let keys = yaml.load(fs.readFileSync('keys.yaml'))
 const PORT = 8443
 
 const stripe = require('stripe')(keys.keySecret)
 
-app.set('view engine', 'pug');
-app.use(require('body-parser').urlencoded({extended: false}))
+express.set('view engine', 'pug');
+express.use(require('body-parser').urlencoded({extended: false}))
 
 // ////////////////////////////////////////////////
 let keyPublishable = keys.keyPublishable
-app.get('/', (req, res) =>
+express.get('/', (req, res) =>
   res.render('index.pug', {keyPublishable}))
 
-app.post('/charge', (req, res) => {
+express.post('/charge', (req, res) => {
   let amount = 500;
 
   stripe.customers.create({
@@ -32,5 +34,5 @@ app.post('/charge', (req, res) => {
   .then(charge => res.render('charge.pug'));
 });
 
-app.listen(PORT)
-
+express.listen(PORT)
+console.log(PORT)

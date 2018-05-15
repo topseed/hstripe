@@ -1,23 +1,19 @@
 {
-  "name": "hstripe",
-  "version": "1.0.0",
-  "description": "",
-  "engines": {
-		"node": ">=8.11.1"
- 	},
-  "main": "index.js",
-  "scripts": {
-		"start": "node index.js"
-	},
-  "license": "ISC",
-  "repository": {
-	"type": "git",
-	"url": "http://github.com/topseed"
- 	},
-  "dependencies": {
-	 "body-parser": "^1.18.2",
-	 "express": "^4.16.3",
-	 "pug": "^2.0.3",
-	 "stripe": "^5.9.0"
-  }
+ "name": "hstripe",
+ "version": "1.0.0",
+ "description": "",
+ "engines": {
+  "node": ">=8.11.1"
+ },
+ "main": "index.js",
+ "scripts": {
+  "start": "node index.js"
+ },
+ "dependencies": {
+  "body-parser": "^1.18.3",
+  "express": "^4.16.3",
+  "js-yaml": "^3.11.0",
+  "pug": "^2.0.3",
+  "stripe": "^5.10.0"
+ }
 }
