@@ -35,7 +35,7 @@ exp.post('/api/charge', (req, res) => {
 })
 
 // ////////////////////////////////////////////////
-exp.use(express.static('www'))
+exp.use(express.static('public'))
 exp.listen(PORT)
 console.log(PORT)
 
